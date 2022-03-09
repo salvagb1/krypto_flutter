@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('oso'),
+        title: const Text(''),
       ),
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(10),

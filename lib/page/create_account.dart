@@ -11,7 +11,7 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _showPassword = false;
-  final allCheked = CheckBoxModal(title);
+  final _agree = CheckBoxModal(title);
 
   static get title => null;
 
@@ -19,7 +19,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('oso'),
+        title: const Text(''),
       ),
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(10),
@@ -128,21 +128,39 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 40,
               ),
-              ListTile(
-                leading: Checkbox(
-                  value: allCheked.value,
-                  onChanged: (value) {
-                    setState(() {
-                      allCheked.value = !allCheked.value;
-                    });
-                  },
+              DefaultTextStyle(
+                style: const TextStyle(
+                  color: Colors.black,
                 ),
-                title: Text(
-                  allCheked.title,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: <Widget>[
+                    Checkbox(
+                      value: _agree.isChecked,
+                      onChanged: (isChecked) {
+                        setState(() {
+                          _agree.isChecked = !_agree.isChecked;
+                        });
+                      },
+                    ),
+                    const Text(
+                        "Certifico que tengo 18 años de edad y acepto el "),
+                    InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        "Contrato de Usuario",
+                        style: TextStyle(color: Color(0xff00C880)),
+                      ),
+                    ),
+                    const Text(" y la "),
+                    InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        "Política de Privacidad.",
+                        style: TextStyle(color: Color(0xff00C880)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -173,9 +191,7 @@ class _CreateAccountState extends State<CreateAccount> {
 }
 
 class CheckBoxModal {
-  String title =
-      "Certifico que tengo 18 años de edad y acepto el Contrato de Usuario y la Política de Privacidad.";
-  bool value = false;
+  bool isChecked = false;
 
   CheckBoxModal(title);
 }
