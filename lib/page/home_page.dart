@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:krypto/page/create_account.dart';
 import 'package:krypto/page/login_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,7 +31,10 @@ class _HomePageState extends State<HomePage> {
               height: 50,
               width: MediaQuery.of(context).size.width * 0.9,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CreateAccount())),
                 child: const Text(
                   "Crear cuenta",
                   style: TextStyle(
