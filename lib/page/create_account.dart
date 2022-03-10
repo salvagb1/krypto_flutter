@@ -8,12 +8,13 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  //late TextEditingController nameController;
   TextEditingController nameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _showPassword = false;
-  final _agree = CheckBoxModal(title);
-
-  static get title => null;
+  bool _agree = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +46,10 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(
@@ -62,12 +61,10 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
+              TextField(
+                controller: lastnameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(
@@ -79,12 +76,10 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
+              TextField(
+                controller: email,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(
@@ -96,25 +91,23 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                child: TextField(
-                  obscureText: _showPassword == false ? true : false,
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    suffixIcon: GestureDetector(
-                      child: Icon(
-                        _showPassword == false
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Colors.black,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _showPassword = !_showPassword;
-                        });
-                      },
+              TextField(
+                obscureText: _showPassword == false ? true : false,
+                controller: passwordController,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  suffixIcon: GestureDetector(
+                    child: Icon(
+                      _showPassword == false
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Colors.black,
                     ),
+                    onTap: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -128,6 +121,12 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 40,
               ),
+              RichText(
+                text: const TextSpan(children: [
+                  TextSpan(
+                      text: 'Certifico que tengo 18 años de edad y acepto el')
+                ]),
+              ),
               DefaultTextStyle(
                 style: const TextStyle(
                   color: Colors.black,
@@ -136,10 +135,10 @@ class _CreateAccountState extends State<CreateAccount> {
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: <Widget>[
                     Checkbox(
-                      value: _agree.isChecked,
-                      onChanged: (isChecked) {
+                      value: _agree,
+                      onChanged: (a) {
                         setState(() {
-                          _agree.isChecked = !_agree.isChecked;
+                          _agree = a!;
                         });
                       },
                     ),
@@ -188,10 +187,4 @@ class _CreateAccountState extends State<CreateAccount> {
           )),
     );
   }
-}
-
-class CheckBoxModal {
-  bool isChecked = false;
-
-  CheckBoxModal(title);
 }
